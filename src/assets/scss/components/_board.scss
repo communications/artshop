@@ -1,0 +1,102 @@
+.board
+{
+	@include clearfix;
+
+	.col
+	{
+		width:25%;
+		float: left;
+
+		@include breakpoint (medium down) {
+			float: none;
+			width:100%;
+		}
+
+		> a
+		{
+			padding: 40px;
+			font-family: fs_matthewlight;
+			height: 300px;
+			overflow: hidden;
+
+			@include breakpoint (medium down) {
+				height: auto;
+			}
+
+			span.label
+			{
+				display: block;
+				margin-bottom: 20px;
+				background:none;
+				font-size: 14px;
+				padding: 0;
+				position: relative;
+				font-family: zonapro-black;
+
+				&::before
+				{
+					font-family: FontAwesome;
+					content:"\f099";
+					margin-right: 5px;
+					font-size: 22px;
+				}
+			}
+
+			span.title
+			{
+				font-size: 18px;
+				line-height: 22px;
+			}
+		}
+
+		&.tweet
+		{
+			> a
+			{
+				background:#55acee;
+				color: #fff;
+				display: block;
+			}
+		}
+
+		&.facebook
+		{
+			> a
+			{
+				background:#354E91;
+				color: #fff;
+				display: block;
+
+				span.label
+				{
+					&::before
+					{
+						content: "\f09a";
+					}
+				}
+			}
+		}
+
+		&:nth-child(even)
+		{
+			&.tweet
+			{
+				> a
+				{
+					background: darken(#55acee, 10%);
+				}
+			}
+		}
+
+		&:nth-child(odd)
+		{
+			&.facebook
+			{
+				> a
+				{
+					background: darken(#354E91, 10%);
+				}
+			}
+		}
+	}
+}

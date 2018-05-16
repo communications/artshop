@@ -1,0 +1,263 @@
+//http://foundation.zurb.com/building-blocks/blocks/topbar-responsive.html
+
+$topbar-responsive-bg: #2c3840;
+$topbar-responsive-animation-type: none; // or use slide-down or none tester
+
+#top
+{
+    @include breakpoint(medium only)
+    {
+      margin-top: 65px;
+    } 
+}
+
+.top-bar,
+.top-bar-title
+{
+  transform: translate3d(0,0,0);
+}
+
+.topbar-responsive {
+  background: none;
+  padding: 0;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index:9999;
+
+  .top-bar-right
+  {
+    width: 50%;
+
+    @include breakpoint(medium down)
+    {
+      width: 100%;
+      float: none;
+      @include clearfix;
+    }
+  }
+
+  a.nav-title
+  {
+    display: none;
+    font-size: 32px;
+    color: #bba461;
+    margin-left: 30px;
+    text-shadow: 0 -1px 0 rgba(255, 255, 255, 1);
+    @include small_logo_svg;
+    width: 135px;
+    height: 60px;
+    background-size: 100%;
+
+    @include breakpoint(medium down)
+    {
+      margin-left: 20px;
+    }
+    
+    strong
+    {
+      @include boldfont;
+      position: absolute;
+      left: -9999px;
+    }
+  }
+
+  .topbar-responsive-logo {
+    color: $white;
+    vertical-align: middle;
+  }
+
+  .menu 
+  {
+    padding: 10px;
+    background: rgba(255,255,255,.8);
+
+    @include breakpoint(medium only)
+    {
+      background: rgba(255,255,255,.95);
+    }
+
+    @include breakpoint(small down)
+    {
+      background: none;
+    }
+
+    li
+    {
+      margin-right: 0.3rem;
+
+      @include breakpoint(small down)
+      {
+        margin: 0;
+        display: block;
+        padding: 10px 0;
+      }
+    }
+    
+    li:last-of-type {
+      margin-right: 0;
+    }
+
+    li.active
+    {
+      background: none;
+
+      a
+      {
+        color: #000;
+        background: none;
+        @include boldfont;
+      }
+    }
+
+    a {
+      color: #666;
+      transition: color 0.15s ease-in;
+      padding: 13px;
+      font-size: 18px;
+      display: block;
+
+      &:hover {
+        color: darken($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        padding: 0.875rem 0;
+      }
+
+      @include breakpoint(small down)
+      {
+        padding: 10px 0;
+        color: #000 !important;
+        @include boldfont;
+      }
+    }
+
+    .topbar-responsive-button {
+      color: #000;
+      border-color: #000;
+      border-radius: 5000px;
+      transition: color 0.15s ease-in, border-color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+        border-color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        width: 100%;
+        margin: 0.875rem 0;
+      }
+    }
+  }
+
+   @media screen and (max-width: 39.9375em) {
+
+    .top-bar-title {
+      position: relative;
+      width: 100%;
+
+      span {
+        position: absolute;
+        right: 0;
+        border: 1px solid $white;
+        border-radius: 5px;
+        padding: 0.25rem 0.45rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,.5);
+        z-index: 9999;
+
+
+      }
+    }
+  }
+
+  &.scroll
+  {
+      a.nav-title
+      {
+        display: block !important;
+      }
+  }
+
+  &.sub
+  {
+    .menu
+    {
+      background: none;
+
+      li
+      {
+        a
+        {
+          color: #fff;
+        }
+      }
+    }
+
+    &.scroll
+    {
+      background: rgba(0,0,0,.5) !important;
+
+      .top-bar-title
+      {
+        > a
+        {
+          color: #fff !important;
+          text-shadow:none;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  } to {
+    opacity:1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@include breakpoint(small only) {
+  .topbar-responsive-links {
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+    width: 100%;
+    z-index: 9998;
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    top: 0;
+    @include clearfix;
+
+    @if $topbar-responsive-animation-type == slide-down {
+      animation: slideDown 1s ease-in;
+    } @else if $topbar-responsive-animation-type == fade-in {
+      animation: fadeIn 1s ease-in;
+    } @else {
+      animation: none;
+    }
+  }
+}
+
+.menu-btn
+{
+  position: fixed;
+  right: 10px;
+  top: 15px;
+  background: rgba(0,0,0,.5);
+  padding: 3px 10px 10px 10px;
+  z-index: 9999;
+}

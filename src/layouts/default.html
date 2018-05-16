@@ -1,0 +1,46 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulster University Shop</title>
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  </head>
+  <body>
+
+    {{!-- Pages you create in the src/pages/ folder are inserted here when the flattened page is created. --}}
+    {{> body}}
+    <script type="text/javascript" src="//www.youtube.com/iframe_api?v=9"></script>
+    <script src="{{root}}assets/js/app.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        jQuery(window).scroll(function() {
+          var winTop = $(window).scrollTop();
+          if (winTop >= 30) {
+            jQuery("h1.brand").hide();
+            jQuery("a.nav-title").show();
+            jQuery(".top-bar-title").show();
+            jQuery('.topbar-responsive').css('background','rgba(255,255,255,.9)');
+            jQuery('.topbar-responsive').addClass('scroll');
+          } else{
+            jQuery("h1.brand").show();
+            jQuery("a.nav-title").hide();
+            jQuery(".top-bar-title").hide();
+            jQuery('.topbar-responsive').css('background','none');
+            jQuery('.topbar-responsive').removeClass('scroll');
+          }
+        });
+        jQuery(document).mouseup(function (e) {
+          var container = jQuery('#contact-panel');
+          if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.removeClass('is-active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

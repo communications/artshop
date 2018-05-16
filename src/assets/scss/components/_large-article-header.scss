@@ -1,0 +1,102 @@
+//http://foundation.zurb.com/building-blocks/blocks/large-article-header.html
+
+$large-article-header-color: $white;
+$large-article-header-height: rem-calc(500);
+
+.large-article-header {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: $large-article-header-height;
+  position: relative;
+
+  @include breakpoint(small only) {
+    height: ($large-article-header-height / 1.5);
+  }
+
+  &::before
+  {
+    content: ' ';
+    background-image:linear-gradient(to bottom,rgba(0,0,0,0),#000);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    height: 40%;
+    bottom: 0;    
+  }
+
+  &::after
+  {
+    content: ' ';
+    background-image:linear-gradient(to top,rgba(0,0,0,0),#000);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    height: 40%;
+    top: 0;    
+  }
+}
+
+.large-article-header-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: rem-calc(50);
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  @include breakpoint(small only) {
+    bottom: rem-calc(20);
+  }
+
+  .center-container {
+    width: 100%;
+    max-width:75rem;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    margin: 0 auto;
+
+    @include breakpoint(small only) {
+      width: 100%;
+      padding: 0 rem-calc(20);
+    }
+  }
+
+  .article-date {
+    color: $large-article-header-color;
+  }
+  .article-title {
+    h2 {
+      line-height: rem-calc(50);
+      color: $large-article-header-color;
+      font-weight: 600;
+
+      @include breakpoint(small only) {
+        line-height: rem-calc(30);
+      }
+    }
+  }
+  .article-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      color: $large-article-header-color;
+    }
+  }
+  .article-author {
+    display: flex;
+    align-items: center;
+    margin: $global-margin 0;
+    img {
+      border-radius: rem-calc(50);
+    }
+    a {
+      margin-left: $global-margin;
+    }
+  }
+}

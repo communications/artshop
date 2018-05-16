@@ -1,0 +1,372 @@
+/**
+ *
+ * =======================================================================
+	 Transitions
+ * =======================================================================
+ */
+
+@mixin transition-color
+{
+	-webkit-transition: color 0.4s linear;
+	-moz-transition: color 0.4s linear;
+	-o-transition: color 0.4s linear;
+  transition: color 0.4s linear;
+}
+
+@mixin transition-background
+{
+	-webkit-transition: background-color 0.1s linear;
+	-moz-transition: background-color 0.1s linear;
+	-o-transition: background-color 0.1s linear;
+	transition: background-color 0.1s linear;
+}
+
+@mixin transition-background-slow
+{
+	-webkit-transition: background-color 0.5s linear;
+	-moz-transition: background-color 0.5s linear;
+	-o-transition: background-color 0.5s linear;
+	transition: background-color 0.5s linear;
+}
+
+@mixin transition-width
+{
+	-webkit-transition: width 0.5s linear;
+	-moz-transition: width 0.5s linear;
+	-o-transition: width 0.5s linear;
+	transition: width 0.5s linear;
+}
+
+@mixin transition-filter
+{
+	-webkit-transition: 1s;
+	-moz-transition: filter 1s linear;
+	-o-transition: filter 1s linear;
+	transition: filter 1s linear;
+}
+
+@mixin transition-all
+{
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out; 	
+}
+
+@mixin transition-none
+{
+	-webkit-transition: all 0s ease-in-out;
+	-moz-transition: all 0s ease-in-out;
+	-o-transition: all 0s ease-in-out;
+	-ms-transition: all 0s ease-in-out;
+	transition: all 0s ease-in-out; 	
+}
+
+@mixin clearfix 
+{
+  &:after 
+  {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin opacity(
+	$set: 0.50,
+	$ie: 50
+) {
+	-moz-opacity: $set;
+	opacity: $set;
+	filter: alpha(opacity=$ie);
+}
+
+@mixin border-radius( $radius: 3px ){
+	-webkit-border-radius: $radius;
+	   -moz-border-radius: $radius;
+	        border-radius: $radius;		
+}
+
+@mixin box-shadow( 
+	$x : 2px, 
+	$y : 2px, 
+	$blur : 5px, 
+	$spread : 0, 
+	$color : rgba(0,0,0,.6) 
+) {
+	-webkit-box-shadow: $x $y $blur $spread $color;
+	   -moz-box-shadow: $x $y $blur $spread $color;	
+			box-shadow: $x $y $blur $spread $color;	
+}
+
+$button_border_colour: transparent transparent transparent;
+
+@mixin button(
+	$colour: #fff
+) {
+	padding: 10px 20px;
+	height: 40px;
+	color: $colour;
+	text-align: center;
+	display: inline-block;
+	font-size: 18px;
+	line-height: 22px;
+	margin-top: 20px;
+	position: relative;
+	font-family: zonapro-black;
+	//@include border-radius(5px);
+	@include clearfix;
+	@include transition-all;
+
+  @include breakpoint(small down)
+  {
+  	height: 28px;
+  	padding: 3px 10px;
+  	font-size: 16px;
+  	margin-top: 5px;
+  }
+
+	&::after
+	{
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 0;
+	  height: 0;
+	  right: -40px;
+	  border-style: solid;
+	  border-width: 20px;
+	  border-color: transparent transparent transparent #8890B6;
+
+	  @include breakpoint(small down)
+	  {
+	  	border-width: 14px;
+	  	right: -28px;
+	  }
+	}
+
+  &:hover
+  {
+    @include opacity(.8,80);
+    color: #fff;
+  }
+}
+
+.slanted 
+{
+	position: relative;
+	width: 190px;
+	padding: 10px 0;
+	overflow: hidden;
+	@include transition-all;
+	/*
+	  in fact, overflow: hidden is not necessary;
+	  border: 1px solid transparent;
+	  could fix inner margins as well, but to prevent rounding errors 
+	  it seem better to enlarge borders, offset them away and crop with overflow
+	*/
+
+	&::before,
+	&::after 
+	{
+		content: '';
+		position: absolute;
+		left: 0; 
+		z-index: -1; /* underlay beneath content */
+		background-color: rgba(255,255,255,.5);
+		border-color: rgba(255,255,255,.5);
+	}
+
+	&::before 
+	{
+		top: 0;
+		right: 0; 
+		bottom: 20px; /* == border-top-width of :after */
+	}
+
+	&::after 
+	{ 
+		top: auto; 
+		right: -10px; /* + some px to mask rounding errors during scale */
+		bottom: 0;
+		border-style: solid;
+		border-width: 20px 20px 0 0; /* this is the actual slant*/
+		background-color: transparent;
+		border-right-color: transparent; /* this is the actual slant*/
+	}
+
+	&:hover
+	{
+		&::before,
+		&::after 
+		{
+			background-color: #fff;
+			border-color: #fff;
+		}
+
+		&::after 
+		{
+			background-color: transparent;
+			border-right-color: transparent; /* this is the actual slant*/
+		}
+	}
+}
+
+/// Triangle helper mixin
+/// @param {Direction} $direction - Triangle direction, either `top`, `right`, `bottom` or `left`
+/// @param {Color} $color [currentcolor] - Triangle color 
+/// @param {Length} $size [1em] - Triangle size
+@mixin triangle($direction, $color: currentcolor, $size: 1em) {
+  @if not index(top right bottom left, $direction) {
+    @error "Direction must be either `top`, `right`, `bottom` or `left`.";
+  }
+
+  width: 0;
+  height: 0;
+  content: '';
+  z-index: 2;
+  border-#{opposite-position($direction)}: ($size * 1.5) solid $color;
+  
+  $perpendicular-borders: $size solid transparent;
+  
+  @if $direction == top or $direction == bottom {
+    border-left:   $perpendicular-borders;
+    border-right:  $perpendicular-borders;
+  } @else if $direction == right or $direction == left {
+    border-bottom: $perpendicular-borders;
+    border-top:    $perpendicular-borders;
+  }
+}
+
+@mixin triangle($colour, $size, $left, $top)
+{
+	content: "\f107";
+	font-family: FontAwesome;
+	position: absolute;
+	left: $left;
+	top: $top;
+	font-size: $size;
+	line-height: 0;
+	z-index: 1;
+	color: $colour;
+	@include opacity(.1,10);
+}
+
+@mixin triangle2($colour, $size, $left, $top)
+{
+	content: "\f0d7";
+	font-family: FontAwesome;
+	position: absolute;
+	left: $left;
+	top: $top;
+	font-size: $size;
+	line-height: 0;
+	z-index: 1;
+	color: $colour;
+}
+
+@mixin cutcorner($colour, $colour-mob, $height, $top, $left, $mobile-top, $background)
+{
+  content:'';
+  height: $height;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: $background;
+  border-top: $top solid $colour;
+  border-left: $top/2 solid transparent;
+
+  @include breakpoint(medium down)
+  {
+    border-top: $mobile-top solid $colour-mob;
+  }
+}
+
+//https://github.com/ryanburgess/SASS-Useful-Mixins/blob/master/mixins/_linear-gradient.scss
+@mixin linear-gradient($top, $bottom) {
+  background: #{$top}; /* Old browsers */
+  background:    -moz-linear-gradient(top, #{$top} 0%, #{$bottom} 100%); /* FF3.6+ */
+  background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%, #{$top}), color-stop(100%, #{$bottom})); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #{$top} 0%, #{$bottom} 100%); /* Chrome10+,Safari5.1+ */
+  background:      -o-linear-gradient(top, #{$top} 0%, #{$bottom} 100%); /* Opera 11.10+ */
+  background:     -ms-linear-gradient(top, #{$top} 0%, #{$bottom} 100%); /* IE10+ */
+  background:         linear-gradient(to bottom, #{$top} 0%, #{$bottom} 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$top}', endColorstr='#{$bottom}', GradientType=0 ); /* IE6-9 */
+}
+
+.content-gradient
+{
+	position: relative;
+
+	&:before
+	{
+		position: absolute;
+		z-index: 4;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		content: '';
+		background: url('//cdn.ulster.ac.uk/home/ulster-frontend/riverside/assets/img/logo-gradient.png') no-repeat 0 0;
+		//@include opacity(0.7,70);
+
+		@include breakpoint(medium down)
+		{
+			display: none;
+		}
+	}
+}
+
+@mixin box-shadow( 
+	$x : 2px, 
+	$y : 2px, 
+	$blur : 5px, 
+	$spread : 0, 
+	$color : rgba(0,0,0,.6) 
+) {
+	-webkit-box-shadow: $x $y $blur $spread $color;
+	   -moz-box-shadow: $x $y $blur $spread $color;	
+			box-shadow: $x $y $blur $spread $color;	
+}
+
+@mixin apple-style-ds
+{
+	@include box-shadow( 
+		$x : 0, 
+		$y : 0, 
+		$blur : 5px, 
+		$spread : 0, 
+		$color : rgba(0,0,0,0.3) 
+	);
+}
+
+//https://stackoverflow.com/questions/32875046/ios-9-safari-changing-an-element-to-fixed-position-while-scrolling-wont-paint
+@mixin fix-ios-fixed-position
+{
+  transform: translate3d(0px,0px,0px);
+}
+
+@mixin zeropad
+{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.clear
+{
+	@include clearfix;
+}
+
+.mobile-only
+{
+	display: none !important;
+
+  @include breakpoint(medium down)
+  {
+    display: inline-block !important;
+  }
+}

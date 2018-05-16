@@ -1,0 +1,123 @@
+@font-face 
+{
+    font-family: "FS Matthew Web Medium";
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Medium.eot");
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Medium.eot?#iefix") format("embedded-opentype"), url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Medium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face
+{
+    font-family: "FS Matthew Web Regular";
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Regular.eot");
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Regular.eot?#iefix") format("embedded-opentype"), url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face 
+{
+    font-family: "FS Matthew Web Light";
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Light.eot");
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Light.eot?#iefix") format("embedded-opentype"), url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-Light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face 
+{
+    font-family: "FS Matthew Web Bold Italic";
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-BoldItalic.eot");
+    src: url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-BoldItalic.eot?#iefix") format("embedded-opentype"), url("//cdn.ulster.ac.uk/home/ulster-frontend/fonts/fsmatthew/FSMatthewWeb-BoldItalic.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fontsmooth
+{
+    font-style:normal;
+    font-smooth: always !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    /*-letter-kern: 1px 1px 0 0 0
+                  1px 0 2px 0 0
+                  0 0 0;*/
+}
+
+@mixin fontsmooth
+{
+    font-style:normal;
+    font-smooth: always !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    /*-letter-kern: 1px 1px 0 0 0
+                  1px 0 2px 0 0
+                  0 0 0;*/
+}
+
+.boldfontitalic
+{
+    font-family:"FS Matthew Web Bold Italic", Arial, sans-serif;
+    @extend .fontsmooth;
+}
+
+@mixin boldfontitalic
+{
+    font-family:"FS Matthew Web Bold Italic", Arial, sans-serif;
+    @include fontsmooth;
+}
+
+.boldfont
+{
+    font-family:"FS Matthew Web Medium", Arial, sans-serif;
+    @extend .fontsmooth;
+}
+
+@mixin boldfont
+{
+    font-family:"FS Matthew Web Medium", Arial, sans-serif;
+    @include fontsmooth;
+}
+
+.regularfont
+{
+     font-family:"FS Matthew Web Regular", Arial, sans-serif; 
+     font-weight:normal; 
+     font-style:normal;
+     @extend .fontsmooth;
+}
+
+@mixin regularfont
+{
+     font-family:"FS Matthew Web Regular", Arial, sans-serif; 
+     font-weight:normal; 
+     font-style:normal;
+     @include fontsmooth;
+}
+
+.lightfont
+{
+    font-family:"FS Matthew Web Light", Arial, sans-serif;
+    font-weight:200;
+    @extend .fontsmooth;
+}
+
+@mixin lightfont
+{
+    font-family:"FS Matthew Web Light", Arial, sans-serif;
+    font-weight:200;
+    @include fontsmooth;
+}
+
+*
+{
+    @include lightfont;
+}
+
+h2,h3
+{
+  @include regularfont;
+}

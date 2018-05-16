@@ -1,0 +1,100 @@
+//http://foundation.zurb.com/building-blocks/blocks/sticky-shrinknav.html
+
+$sticky-shrinknav-menu-height: rem-calc(60);
+$sticky-shrinknav-hero-height: 300px;
+
+body {
+  padding-top: $sticky-shrinknav-hero-height;
+}
+
+.sticky-shrinknav-menu {
+  height: $sticky-shrinknav-menu-height;
+  line-height: $sticky-shrinknav-menu-height;
+  width: 100%;
+  background-color: rgba(#000, 0.6);
+  transition: all 0.5s ease;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+
+
+
+  li {
+    text-align: center;
+    display: inline-block;
+    box-shadow: none;
+  }
+
+  a {
+    transition: all 0.3s ease;
+    color: $white;
+    text-align: center;
+    display: block;
+
+    &:hover {
+      outline: 1px solid #fff;
+    }
+  }
+}
+
+.sticky-shrinknav-header-title {
+  transition: all 0.3s ease;
+  position: relative;
+  transform: translateY(-$sticky-shrinknav-menu-height/2);
+  margin-bottom: 0;
+  color: $white;
+  position: relative;
+  z-index: 9999;
+}
+
+.sticky-shrinknav-header {
+  width: 100%;
+  height: $sticky-shrinknav-hero-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lighten($primary-color, 10%);
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  background: url('//cdn.ulster.ac.uk/home/ulster-frontend/img/shop/RS959_UU-BELFAST-Oct2014-3873-lpr.jpg') no-repeat 0 0;
+  background-size: cover;
+  background-position: 0 100%;
+
+  &::before
+  {
+    content:' ';
+    background: linear-gradient(to bottom right,#000,rgba(255,255,255,0));
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: .8;
+  }
+
+  > div
+  {
+    background-color: rgba(#000, 0.3);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+}
+
+body.sticky-shrinknav-wrapper {
+  padding-top: 130px;
+
+  .sticky-shrinknav-header{
+    height: $sticky-shrinknav-menu-height;
+    background-color: rgba($primary-color, 0.9);
+
+    .sticky-shrinknav-header-title{
+      transform: scale(0);
+      transition: all 0.3s ease;
+    }
+  }
+}
